@@ -1,0 +1,141 @@
+<div class="card mx-auto p-2 mt-5 " style="width: fit-content; ">
+    
+    <!-- <div class="card-body">
+        <form #cardData1="ngForm">
+            <h1 class="text-center">Make Payment</h1>
+            <div class="mb-3">
+              <label for="exampleInputEmail1" class="form-label">Name On Card</label>
+              <input type="text" class="form-control" name="nameOnCard" id="exampleInputnameOnCar" required  ngModel #nameOnCard="ngModel" [(ngModel)]="NOnCard" >
+             
+            </div>
+            <div class="mb-3">
+              <label for="cardNumber" class="form-label"> cardNumber</label>
+              <input type="number" required class="form-control " [ngClass]="{'text-decoration-underline':numLength ,'text-danger':numLength}" id="cardNumber" ngModel #cardNumber="ngModel"  [(ngModel)]="numb" (ngModelChange)="ConfigInput()" [value]="numb" name="cardNumber">
+            </div>
+            
+            <div class="mb-3">
+                <label for="expiry" class="form-label">expiry</label>
+                <input type="text" required class="form-control" id="expiry" ngModel #expiry="ngModel" name="expiry" [(ngModel)]="Exdate" placeholder="mm/yyyy">
+            </div>
+            <div class="mb-3">
+                <label for="cvv" class="form-label">cvv</label>
+                <input type="text" required class="form-control" id="cvv" ngModel #cvv="ngModel" name="cvv">
+              </div>
+            
+            <div class="text-center">
+        
+                <button type="submit" (click)="PaymentByCard(cardData)" [disabled]="!cardData.valid" class="mb-3 btn btn-primary">Pay</button>
+            </div>
+        </form>
+     
+    </div>
+  </div> -->
+
+  <div class="w-100 text-center mb-4" style="margin-top: 30px;">
+    <h3 style="    font-family: 'Bree Serif', serif; color: rgba(60, 135, 248, 0.867); ">Payment</h3>
+  </div>
+
+  <div class="container-fluid " style="margin-bottom: 30px;">
+    <div class="row ">
+      <div class="col d-flex justify-content-center">
+
+        <div class="card creditCard "  *ngIf="ShowCard">
+         <div class="p" style="width: fit-content;">
+    
+           <img src="../../../../assets/logo/Smart-Chip-CPU-by-Merlin2525.svg" style="width: 30px; transform: rotate(90deg);" alt="">
+         </div>
+         <div style="position: relative; top: -15%; left: 75%; width: fit-content;">
+           <img src="../../../../assets/logo/icons8-visa.svg" alt="">
+         </div>
+         <h3 class="fontOfName">{{cardNo[0]||'*'}}{{cardNo[1]||'*'}}{{cardNo[2]||'*'}}{{cardNo[3]||'*'}}&nbsp;{{cardNo[4]||'*'}}{{cardNo[5]||'*'}}{{cardNo[6]||'*'}}{{cardNo[7]||'*'}}&nbsp;{{cardNo[8]||'*'}}{{cardNo[9]||'*'}}{{cardNo[10]||'*'}}{{cardNo[11]||'*'}}&nbsp;{{cardNo[12]||'*'}}{{cardNo[13]||'*'}}{{cardNo[14]||'*'}}{{cardNo[15]||'*'}}</h3>
+         <p class="font1" style="width: fit-content;">{{NOnCard || 'CardHolder`s Name'}}</p>
+        <p class="Exdt">{{month || 'mm'}}/{{year ||'yyyy'}}</p>
+       </div>
+
+
+       <div class="card creditCard  "  *ngIf="!ShowCard">
+        
+          <div class="w-100 bg-dark mt-4" style="height: 40px;">
+
+          </div>
+          <div class="w-100 d-flex">
+
+            <div class="w-75 bg-light mt-2" style="height: 30px;">
+  
+            </div>
+            <div class="bg-light  mt-2" style="height: 30px; width: 45px;">
+                <p>{{cvvOfCard}}</p>
+            </div>
+          </div>
+          <div class="mx-auto mt-4" style="width: fit-content;">
+              <img src="../../../../assets/logo/icons8-visa.svg" style="width: 70px;" alt="">
+          </div>
+
+
+      </div>
+      </div>
+     <div class="col-xl-6 p-4 d-flex justify-content-center">
+      
+       <div class="row mt-2" style="width: fit-content;">
+         
+         <form #cardData="ngForm" autocomplete="off">
+           <div class="col-12 mb-3">
+               <!-- <label for="InputNumber" class="form-label">Card Number</label4111111111111111> -->
+               <input type="number" style="height: 33px;"  class="form-control" (focus)="ShowCard=true" id="InputNumber" required placeholder="Card Number" [ngClass]="{'text-decoration-underline':numLength ,'text-danger':numLength}" id="cardNumber" ngModel #cardNumber="ngModel"  [(ngModel)]="numb" (ngModelChange)="ConfigInput()" [value]="numb" name="cardNumber">
+           </div>
+           <div class="col-12 mb-3">
+              <!-- <label for="NameOfCard" class="form-label">Name</label> -->
+              <input type="text" style="height: 33px;" class="form-control" (focus)="ShowCard=true" name="nameOnCard" id="NameOfCard" placeholder="Card Holder`s Name" required  ngModel #nameOnCard="ngModel" [(ngModel)]="NOnCard">
+           </div>
+           <div class="row">
+
+             <div class="col-7 mt-2">
+              
+               <div class="form-floating d-flex ">
+                 <select class="form-select py-0 me-2" id="floatingSelectGrid" (focus)="ShowCard=true" [(ngModel)]="month"  required ngModel name="mm" #mm  style="max-width: fit-content; height: 33px; "  >
+                  
+                  <option value="01">01</option>
+                  <option value="02">02</option>
+                  <option value="03">03</option>
+                  <option value="04">04</option>
+                  <option value="05">05</option>
+                  <option value="06">06</option>
+                  <option value="07">07</option>
+                  <option value="08">08</option>
+                  <option value="09">09</option>
+                  <option value="10">10</option>
+                  <option value="11">11</option>
+                  <option value="12">12</option>
+                </select>
+                <label for="floatingSelectGrid" class="p-0 m-0" style="left: 3%;top:-40%">mm</label>
+                <select class="form-select py-0" id="floatingSelectGrid1" (focus)="ShowCard=true" required name="yyyy" [(ngModel)]="year" ngModel #yyyy style="max-width: fit-content; height: 33px; " >
+                  
+                  <option value="2023">2023</option>
+                  <option value="2024">2024</option>
+                  <option value="2025">2025</option>
+                  <option value="2026">2026</option>
+                  <option value="2027">2027</option>
+                  <option value="2031">2031</option>
+                  <option value="2032">2032</option>
+                  <option value="2033">2033</option>
+                  <option value="2034">2034</option>
+                </select>
+                <label for="floatingSelectGrid1" class="p-0 m-0 text-end " style="left: -23%; top:-40%">yyyy</label>
+              </div>
+            </div>
+            
+             
+              <div class="col-5 mb-3 d-flex justify-content-end">
+                <!-- <label for="InputCVV" class="form-label">Card Number</label> -->
+                <input type="number" style="height: 33px; width: 70%;" max="999"  (focus)="ShowCard=false" class="form-control" id="InputCVV" [ngClass]="{'text-danger' : CVV }"   [(ngModel)]="cvvOfCard" (ngModelChange)="configCvv()" required  placeholder="CVV" ngModel #cvv="ngModel" name="cvv">
+            
+           </div>
+           </div>
+           <button type="submit" class="btn btn-info btn-sm w-100 mt-2" (click)="PaymentByCard(cardData)" [disabled]="!cardData.valid">Pay</button>
+         </form>
+        </div>
+       </div>
+       </div>
+
+
+  </div>

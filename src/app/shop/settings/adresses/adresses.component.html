@@ -1,0 +1,213 @@
+<div class="container">
+  <div
+  class="card mx-auto  shadow-lg" style="width:fit-content;"
+   *ngIf="EditAddress"
+>
+  <h3 class="card-title text-center mt-3 text-decoration-underline" >Addresses({{res?.length}})</h3>
+  <div class="row card-body">
+    <div class="col-md-4 mb-3 border-end border-dark">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <img src="{{profile?.picture}}" class="rounded-3 mt-2 img-fluid " style="max-width: 150px;" alt="ProfilePic">
+            </div>
+            <div class="col-md-12 mt-3 text-center">
+                <h5>
+                    Name:
+                </h5>
+                <span>{{profile?.name}}</span>    
+
+                <h5>
+                    Email:
+                </h5>
+                <span>{{profile?.email}}</span> 
+            </div>
+            
+        </div>
+    </div>
+    <div class="col-md-8">
+      <div class="row" *ngIf="res?.length == 0">
+        <h3>No Address Added</h3>
+      </div>
+      <div
+        class="row p-3 d-flex justify-content-between overflow-auto"
+        style="height: 500px"
+        *ngIf="res?.length != 0"
+      >
+        <div
+          class="col-md-5 p-2 me-2 mt-3  mb-3"
+          *ngFor="let add of res; let index = index"
+        >
+          <h3>Address{{ index + 1 }}</h3>
+          <hr />
+          <div class="row" *ngIf="UpdateAdd != index">
+            <div class="col-12">
+              <strong>street : </strong>
+              <p>{{ add?.street }}</p>
+            </div>
+            <div class="col-12">
+              <strong>addressLine2 : </strong>
+              <p>{{ add?.addressLine2 }}</p>
+            </div>
+            <div class="col-12">
+              <strong>City : </strong>
+              <p>{{ add?.city }}</p>
+            </div>
+            <div class="col-12">
+              <strong>State : </strong>
+              <p>{{ add?.state }}</p>
+            </div>
+            <div class="col-12">
+              <strong>Pin-code : </strong>
+              <p>{{ add?.pin }}</p>
+            </div>
+            <div class="col-12 d-flex justify-content-around">
+                <button (click)="deleteAdd(index)" class="btn-sm btn-danger"><img src="../../../../assets/logo/trash3.svg" alt=""></button>
+                <button (click)="EditAdd(index)" class="btn-sm btn-warning"><img src="../../../../assets/logo/pencil-fill.svg" alt=""></button>
+            </div>
+          </div>
+          <div class="row" *ngIf="UpdateAdd == index">
+            <div class="col-12">
+              <strong>street : </strong>
+              <input type="text" [(ngModel)]="address.street" class="form-control">
+            </div>
+            <div class="col-12">
+              <strong>addressLine2 : </strong>
+              <input type="text" [(ngModel)]="address.addressLine2" class="form-control">
+            </div>
+            <div class="col-12">
+              <strong>City : </strong>
+              <input type="text" [(ngModel)]="address.city" class="form-control">
+            </div>
+            <div class="col-12">
+              <strong>State : </strong>
+              <input type="text" [(ngModel)]="address.state" class="form-control">
+            </div>
+            <div class="col-12 mb-2">
+              <strong>Pin-code : </strong>
+              <input type="number" [(ngModel)]="address.pin" class="form-control">
+            </div>
+            <div class="col-12 d-flex justify-content-around">
+                <button (click)="cancleAdd(index)" class="btn-sm btn-danger"><img src="../../../../assets/logo/x-circle.svg" alt=""></button>
+                <button (click)="UPadateAdd(index)" class="btn-sm btn-success"><img src="../../../../assets/logo/check-circle-fill.svg" alt=""></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a (click)="GoToaddAddress()" class="btn btn-primary">Add Address</a>
+  </div>
+
+</div>
+
+<!-- to add address -->
+
+<div
+  class="card mx-auto"
+  style="max-width: fit-content; min-height: 500px; max-height: fit-content" *ngIf="!EditAddress"
+>
+    <div class="ms-auto me-2 mt-2" style="max-width: 30px;">
+        <a (click)="GoToaddAddress()"><img src="../../../../assets/logo/x-circle.svg" alt="..."></a>
+
+    </div>
+  <div class="card-body">
+    <h5 class="card-title mb-3">Address</h5>
+    <form #add="ngForm">
+      <div class="row" style="max-width: 500px">
+       
+        <div class="col-12">
+          <div class="form-group">
+            <label for="exampleInputstreet">
+              street<span class="text-danger">*</span></label
+            >
+            <input
+              type="text"
+              class="form-control mb-3"
+              id="exampleInputstreet"
+              name="street"
+              ngModel
+              #street="ngModel"
+              placeholder="Enter street name"
+              required
+            />
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-group">
+            <label for="exampleInputAddressLine2">
+              addressLine2<span class="text-danger">*</span></label
+            >
+            <input
+              type="text"
+              class="form-control mb-3"
+              id="exampleInputAddressLine2"
+              name="addressLine2"
+              ngModel
+              #addressLine2="ngModel"
+              placeholder="Enter AddressLine2"
+              required
+            />
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-group">
+            <label for="exampleInputCity"
+              >City<span class="text-danger">*</span></label
+            >
+            <input
+              type="text"
+              class="form-control mb-3"
+              id="exampleInputCity"
+              name="city"
+              ngModel
+              #city="ngModel"
+              placeholder="Enter City name"
+              required
+            />
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-group">
+            <label for="exampleInputState"
+              >State<span class="text-danger">*</span></label
+            >
+            <input
+              type="text"
+              class="form-control mb-3"
+              id="exampleInputState"
+              name="state"
+              ngModel
+              #state="ngModel"
+              placeholder="Enter State"
+              required
+            />
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="form-group">
+            <label for="exampleInputPin"
+              >Pin-code<span class="text-danger">*</span></label
+            >
+            <input
+              type="number"
+              class="form-control mb-3"
+              id="exampleInputPin"
+              [ngClass]="{ invalids: ValidatePin }"
+              name="pin"
+              ngModel
+              #pin="ngModel"
+              placeholder="Enter pin-code"
+              required
+            />
+          </div>
+        </div>
+     
+      </div>
+      <button (click)="addAddress(add.value)" class="btn btn-primary">
+        Add Address
+      </button>
+    </form>
+  </div>
+</div>
+
+<!-- add address -->
+</div>

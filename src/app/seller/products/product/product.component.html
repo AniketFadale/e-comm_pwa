@@ -1,0 +1,164 @@
+<div class="container-fluid  mt-2 p-3 pt-0" >
+  <div class="card border border-dark ">
+    <div class="card-header"><strong>{{product?.name}}</strong></div>
+    <div class="card-body p-4 ">
+      <div class="row  w-100 containRow" >
+        <div class="col-3 col-sm-2 col-lg-1 p-3 h-75 my-auto overflow-auto" >
+          <div
+            class="row mb-2"
+            *ngFor="let image of product?.images; let index = index"
+          >
+            <img
+              class="img-fluid rounded-3 border border-3"
+              [ngClass]="{'border-dark':selectborder(index)}"
+              src="{{ image.url }}"
+              alt="kuch nahi hai yha"
+              (mouseover)="changeImg($event)"
+              (click)="select(index,$event)"
+            />
+          </div>
+          
+        </div>
+        <div class="col-9 col-lg-6 col-sm-10 d-flex justify-content-center align-items-center">
+          <div class="row" style="width:400px">
+
+            <img src="{{ mainImage }}" id="mainImg" #experiment (click)="f1(experiment)" (mousemove)="imgzoom(experiment,$event)" (mouseleave)="imgzoomout(experiment)" class="img-fluid " style="max-width: 400px;" alt="product img" />
+          </div>
+        </div>
+        <div class="col" *ngIf="!show">
+          <h3>{{ product?.name }}</h3>
+          <hr>
+          <label for="product_des" class="text-primary mb-1">Description : </label>
+          <p class="card-text" [innerHTML]="product?.description"></p>
+          <hr>
+          <label for="product_des" class="text-primary mb-1">Price : </label>
+          <h5>{{( product?.price).toString() | changeCurrency:currency }}</h5>
+        </div>
+        <!-- gauydgahdsg -->
+        <div class="col-3 containerBOx border border-dark rounded-3 mx-auto position-relative overflow-hidden" *ngIf="show">
+          
+            <figure id="magnifying_area" style="background: url('{{mainImage}}'); background-repeat : no-repeat "  >
+              
+            </figure>
+          
+        </div>
+        <!-- dfahdfhajfgjdfgsjdfg -->
+        <div class="row text-center">
+          
+          <div class
+          >
+            <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+          >
+            Add Image
+          </button>
+
+          <span class="ms-3"><button
+            type="button"
+            class="btn btn-danger"
+            (click)="Delete()"
+          >
+            Delete Image
+          </button></span>
+          </div>
+          
+        </div>
+
+      </div>
+      
+     
+     
+    </div>
+  </div>
+</div>
+<!-- zoom effect to main image -->
+
+
+
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <input
+          type="file"
+          name="images"
+          id="multipleImages"
+          (change)="storeImg($event)"
+          multiple
+        />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="button"
+          (click)="AddMultipleIMages()"
+          class="btn btn-primary"
+          data-bs-dismiss="modal"
+        >
+          Save changes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div
+  class="modal fade"
+  id="exampleModal2"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <!-- <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">DO you want to remove image ?</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="button"
+          (click)="Delete()"
+          class="btn btn-primary"
+          data-bs-dismiss="modal"
+        >
+          Delete
+        </button>
+      </div>
+    </div>
+  </div> -->
+</div>

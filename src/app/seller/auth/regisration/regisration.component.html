@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="size  mx-auto border p-5 border-dark rounded-3 mt-3 ">
+    <form #register="ngForm" >
+        <h1 class="text-center mb-4">Register</h1>
+        <div class="form-group">
+            <label for="exampleInputName">Full Name <span class="text-danger">*</span></label>
+            <input type="text" class="form-control mb-3" id="exampleInputName" name="Full_Name" ngModel #name="ngModel" placeholder="Enter Full Name" required>
+        </div>
+        <div class="form-group">
+            <label for="exampleInputCompanyName">Company Name <span class="text-danger">*</span></label>
+            <input type="text" class="form-control mb-3" id="exampleInputCompanyName" name="Company_Name" ngModel #companyName="ngModel" placeholder="Enter Company Name" required>
+        </div>
+        <div class="form-group mb-3">
+          <label for="exampleInputEmail1">Email address <span class="text-danger">*</span></label>
+          <input type="email" class="form-control " id="exampleInputEmail1" name="email" ngModel #email="ngModel" aria-describedby="emailHelp" placeholder="Enter email" email required>
+          <small id="emailHelp" class="form-text text-muted ">We'll never share your email with anyone else.</small>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Password <span class="text-danger">*</span></label>
+          <input type="password" class="form-control mb-3" name="password" id="exampleInputPassword1" ngModel #password="ngModel" placeholder="Password" required>
+        </div>
+        <div class="form-check mb-3">
+          <input type="checkbox" class="form-check-input mb-3" required name="checkbox" ngModel id="exampleCheck1">
+          <label class="form-check-label" for="exampleCheck1">Accept policies</label>
+        </div>
+        <div class="text-center">
+
+            <button type="submit" [disabled]="!register.valid" (click)="submit(register)" class="mb-3 mx-auto btn btn-primary">Register</button>
+        </div>
+      </form>
+      <span>Already Member ?</span><a routerLink="/auth/login" class="mt-2"> Click to Login</a>
+</div>
+</div>

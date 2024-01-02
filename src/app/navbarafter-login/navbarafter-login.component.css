@@ -1,0 +1,16 @@
+.navbar{
+    z-index: 200;
+    width: 100%;
+}
+.dropdown-menu{
+    left: -78px;
+}
+a+ul:hover,a:hover+ul{
+    display: block;
+}
+h4{
+    margin-bottom: 0%!important;
+}
+.bg-secondary{
+    background-color: #6c757d1e!important;
+}

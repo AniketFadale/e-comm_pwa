@@ -1,0 +1,63 @@
+
+::-webkit-scrollbar {
+    width: 2px;
+  }
+.containRow{
+    height: 80vh;
+}
+@media screen and (max-width:991px) {
+    .containRow{
+        height: auto;
+    } 
+}
+#magnifying_area{
+    width: 400px;
+    height: 400px;
+    overflow:hidden;   
+    position: absolute;
+    /* left: 50%; */
+    top:40%;
+}
+#magnifyng_img{
+    
+    position: absolute;
+    left: 50%;
+    top:50%;
+}
+.containerBOx{
+    min-width: 400px;
+    width: auto;
+    height: auto;  
+    box-sizing: border-box;
+    background-color: rgb(255, 255, 255)!important;
+}
+.parent{
+    width: 400px;
+    min-height: 200px;
+    height: 800px;
+    background-color: red;
+    position: relative
+}
+.child{
+    max-width: 100%;
+    min-width: 100%;
+    
+    background-color: black;
+    position: absolute;
+    left: 50%;
+    top:50%;
+    transform : translate (0%,0%);
+    /* pointer-events: none; */
+}
+.child2{
+    
+    max-width: 100%;
+    min-width: 100%;
+    background-color: black;       
+    position: absolute;
+    /* left: 50%;
+    top:50%;
+    transform : translate (-50%,-50%); */
+        /* pointer-events: none; */
+    
+}

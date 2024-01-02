@@ -1,0 +1,66 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap');
+
+
+
+.creditCard{
+   
+background: rgba(68, 104, 237, 0.3);
+border-radius: 16px;
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(0.4px);
+-webkit-backdrop-filter: blur(0.4px);
+height: 200px;
+width: 310px;
+}
+.p{
+    position: relative;
+    top: 34%;
+    left: 10%;
+}
+
+.font1{
+    font-family: 'Bree Serif', serif;
+   
+    color:rgba(11, 9, 2, 0.65);
+    position: relative;
+    bottom:-16%;
+    left:9%
+
+}
+.fontOfName{
+    font-family: 'Bree Serif', serif;
+   
+    color:rgba(11, 9, 2, 0.65);
+    position: relative;
+    top: 13%;
+    left: 7%;
+    font-size:x-large;
+    width: fit-content;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.Exdt{
+    font-family: 'Bree Serif', serif;
+    color:rgba(11, 9, 2, 0.65);
+    font-size:small;
+    position: relative;
+    top: -3%;
+    left: 75%;
+    width: fit-content;
+}
+
+@media screen and (max-width:700px){
+    .creditCard{
+        background: rgba(68, 104, 237, 0.3);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(0.4px);
+        -webkit-backdrop-filter: blur(0.4px);
+        height: 200px;
+        width: 260px;
+    }
+}

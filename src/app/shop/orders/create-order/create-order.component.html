@@ -1,0 +1,72 @@
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            
+            <div class="card">
+                <h3 class="card-title m-auto mt-3">Your Order</h3>
+                <!-- <img src="..." class="card-img-top" alt="..."> -->
+                <div class="card-body">
+                    <div class="row p-3 my-2 border border-bottom border-dark"  *ngFor="let element of cartElement;let index=index">
+                        <div class="col-md-3 d-flex justify-content-center align-items-center">
+                            <img src="{{element?.images[0].url}}" class="img-fluid" style="height: 80px; max-width: 150px;" alt="product Img">
+                        </div>
+                        <div class="col-sm-6 col-md-4 text-center">
+                            <h5>{{element?.name}}</h5>
+                            <!-- <p [innerHTML]="element.description"></p> -->
+                            <h5>Price :</h5>
+                            <P style="display: inline;" [ngClass]="{'text-decoration-line-through' : element.deal, 'fst-italic' :element.deal,'fs-6' : element.deal}">{{element?.price | changeCurrency : currency}}</P> 
+                            <span class="fw-normal, fs-5" appDealDirective [deal]="element?.deal" [price]="element?.price" ></span>
+                            
+                        </div>
+                        <div class="col text-center">
+                            <h5>Quantity :</h5>
+                            <p>{{element?.quantity}}</p>
+                        </div>
+                        <div class="col-xl-2 text-center">
+                            <h5>SubTotal :</h5>
+                            <p *ngIf="element.deal">{{(element?.quantity * element?.deal.price).toString()| changeCurrency : currency}}</p>
+    
+                            <p *ngIf="!element.deal">{{(element?.quantity * element?.price ).toString()| changeCurrency : currency}}</p>
+                        </div>
+                    </div>
+                  <a (click)="MakePayment()" class="btn btn-primary">Make Payment</a>
+                </div>
+              </div>
+    
+        </div>
+        <div class="col-md-4">
+    
+            <div class="card p-4" >
+                <h5 class="card-title">Dilevary Address :</h5>
+    
+                <p  style="margin-left: 20px;">{{add1}}</p>
+               
+                <div class="card-body">
+                    <p>
+                        
+                        <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                         Change
+                        </a>
+                        
+                    </p>
+                      <div class="collapse" id="collapseExample">
+                        <div class=" card card-body overflow-auto row" >
+                            <form >
+    
+                                <div class="form-check form-check-inline" *ngFor="let add of address;let i =index">
+                                    <input class="form-check-input" [checked]="i==0" (change)="f1(i)" type="radio" name="inlineRadioOptions" [(ngModel)]="add1" [id]="'inlineRadio'+i" [value]="add?.street+','+add?.addressLine2 +','+add.city + ',' + add?.state+','+add?.pin ">
+                                    <label class="form-check-label"  [for]="'inlineRadio'+i"><p>{{add?.street+','+add?.addressLine2 +','+add.city + ',' + add?.state+','+add?.pin }}</p></label>
+                                </div>
+                            </form>
+                            
+                        </div>
+                      </div>
+                   
+                 
+                </div>
+              </div>
+        </div>
+    </div>
+</div>
+

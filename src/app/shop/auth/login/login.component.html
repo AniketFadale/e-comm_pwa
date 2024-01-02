@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="size mx-auto border p-5 border-dark rounded-3 mt-3">
+    <form #login="ngForm">
+        <h1 class="text-center">Customer Login</h1>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Email address</label>
+          <input type="email" class="form-control" name="email" id="exampleInputEmail1" required email ngModel #email="ngModel">
+          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input type="password" required class="form-control" id="exampleInputPassword1" ngModel #password="ngModel" name="password">
+        </div>
+        <div class="mb-3">
+          <a (click)="forgotPass()" class="text-primary">forgot password ?</a>
+          
+        </div>
+        <div class="text-center">
+    
+            <button type="submit" (click)="loginCustomer(login)" [disabled]="!login.valid" class="mb-3 btn btn-primary">Login</button>
+        </div>
+        <!-- <div class="text-center">
+    
+          <button type="submit" (click)="loginWithGoogle()" class="mb-3 border border-none"><img src="../../../../assets/google-signin-button-1024x260.png" width="200px" alt=""></button>
+      </div> -->
+      </form>
+      <span>Did not have account ?</span><a routerLink="/shop/auth/register" class="mt-2"> Click to Register</a>
+      
+    </div>
+
+</div>
+
+

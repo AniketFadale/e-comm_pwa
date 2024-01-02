@@ -1,0 +1,24 @@
+.size{
+    width: 60%;
+    /* box-shadow: 0 0 13px black ; */
+    box-shadow: 5px 5px 8px 1px grey
+}
+
+@media screen and (max-width:900px){
+    h1{
+        font-size: 2rem;
+       
+    }
+}
+input.ng-invalid.ng-touched{
+    border: red;
+    box-shadow: 0 0 13px inset rgba(255, 0, 0, 0.807);
+}
+.invalids{
+    border: red;
+    /* box-shadow: 0 0 13px inset rgba(255, 0, 0, 0.807); */
+}
+::-webkit-scrollbar {
+    width: 2px;
+    
+}

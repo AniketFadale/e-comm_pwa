@@ -1,0 +1,63 @@
+<div class="container">
+    <div class="size  mx-auto border p-5 border-dark rounded-3  mb-4 ">
+        <form #register="ngForm" >
+            <h1 class="text-center mb-4">Customer Register</h1>
+            <div class="form-group">
+                <label for="exampleInputName">Full Name <span class="text-danger">*</span></label>
+                <input type="text" class="form-control mb-3" id="exampleInputName" name="Full_Name" ngModel #name="ngModel" placeholder="Enter Full Name" required>
+            </div>
+            <label >Address:<span class="text-danger">*</span></label>
+            <div class="row p-1">
+                <div class="col-sm-6">
+    
+                    <div class="form-group">
+                        <label for="exampleInputstreet"> street<span class="text-danger ">*</span></label>
+                        <input type="text" class="form-control mb-3" id="exampleInputstreet" name="street" ngModel #street="ngModel" placeholder="Enter street name" required>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="exampleInputAddressLine2"> addressLine2<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control mb-3" id="exampleInputAddressLine2" name="addressLine2" ngModel #addressLine2="ngModel" placeholder="Enter AddressLine2" required>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="exampleInputCity">City<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control mb-3" id="exampleInputCity" name="city" ngModel #city="ngModel" placeholder="Enter City name" required>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="exampleInputState">State<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control mb-3" id="exampleInputState" name="state" ngModel #state="ngModel" placeholder="Enter State" required>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <label for="exampleInputPin">Pin-code<span class="text-danger">*</span></label>
+                        <input type="number" class="form-control mb-3" id="exampleInputPin" [ngClass]="{'invalids' : ValidatePin}" name="pin" ngModel #pin="ngModel" placeholder="Enter pin-code" required>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group mb-3">
+              <label for="exampleInputEmail1">Email address <span class="text-danger">*</span></label>
+              <input type="email" class="form-control " id="exampleInputEmail1" name="email" ngModel #email="ngModel" aria-describedby="emailHelp" placeholder="Enter email" email required>
+              <small id="emailHelp" class="form-text text-muted ">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password <span class="text-danger">*</span></label>
+              <input type="password" class="form-control mb-3" name="password" id="exampleInputPassword1" ngModel #password="ngModel" placeholder="Password" required>
+            </div>
+            <div class="form-check mb-3">
+              <input type="checkbox" class="form-check-input mb-3" required name="checkbox" ngModel id="exampleCheck1">
+              <label class="form-check-label" for="exampleCheck1">Accept policies</label>
+            </div>
+            <div class="text-center">
+    
+                <button type="submit" [disabled]="!register.valid" (click)="submit(register)" class="mb-3 mx-auto btn btn-primary">Register</button>
+            </div>
+          </form>
+          <span>Already Member ?</span><a routerLink="/shop/auth/login" class="mt-2"> Click to Login</a>
+    </div>
+</div>

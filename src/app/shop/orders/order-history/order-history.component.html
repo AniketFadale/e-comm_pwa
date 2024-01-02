@@ -1,0 +1,65 @@
+<div class="container ">
+  <div class="d-flex justify-content-center align-items-center" style="height: 100px;">
+    <h2 class="text-decoration-underline" >ORDER HISTORY</h2>
+  </div>
+ <div class="overflow-auto">
+  <div *ngIf="res?.totalResults == 0">
+    <p>No Orders yet ....</p>
+  </div>
+  <table class="table table-dark table-striped table-hover w-75 mx-auto" *ngIf="res?.totalResults != 0">
+   
+    <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Id</th>
+          <th scope="col">Payment Status</th>
+          <th scope="col">Status</th>
+          <th scope="col">Date</th>
+          <th scope="col"></th>
+
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr (click)="showDetails(index)" *ngFor="let order of orderData | paginate
+        : {
+            itemsPerPage: parameters.limit,
+            currentPage: parameters.page,
+            totalItems: res?.totalResults}; let index=index">
+          <th scope="row">{{index+1}}</th>
+          <td>{{order?._id}}</td>
+          <td>{{order?.paymentStatus}}</td>
+          <td>{{order?.status}}</td>
+          
+          <td>{{order?.createdAt | date}}</td>
+          <td><button type="button" (click)="showDetails(index)">Details</button></td>
+
+        </tr>
+        
+      </tbody>
+</table>
+ </div>
+      <div class="row d-flex" >
+        <select style="width: fit-content;" class="form-select shadow-lg form-select-sm sel" [(ngModel)]="parameters.limit" (change)="NumOfOrdersTOShow()" aria-label=".form-select-sm example">
+          <option selected>1</option>
+          <option value="5">5</option>
+          <option value="10">10</option>
+          
+        </select>
+        <div style="width:fit-content">
+
+          <nav aria-label="Page navigation example" >
+            <pagination-controls
+            previousLabel="Prev"
+            nextLabel="Next"
+            [responsive]="true"
+            (pageChange)="onTableDataChange($event)"
+            class="pagination"
+            >
+          </pagination-controls>
+        </nav>
+      </div>
+      </div>
+
+
+</div>

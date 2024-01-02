@@ -1,0 +1,89 @@
+<div class="container mx-auto">
+    <div class="row">
+        <div class="col ">
+          <div class="row">
+            <div class="col">
+
+              <select class="form-select  shadow-lg form-select-sm sort" [(ngModel)]="params.sortBy" [value]="params.sortBy" (change)="callData()" aria-label=".form-select-sm example">
+                <option selected value="default">Default</option>
+                <option value="price">Price</option>
+                <option value="name">Name</option>
+            
+              </select>
+            </div>
+            <div class="col d-flex">
+              <span class="me-3">Currency : </span>
+
+              <select class="form-select shadow-lg form-select-sm sort" [(ngModel)]="currency"  (change)="changeCurrency()"  >
+                <option selected value="₹">₹</option>
+                <option value="$">$</option>
+                <option value="€">€</option>
+                <option value="£">£</option>
+    
+            
+              </select>
+         
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <form class="d-flex mb-2">
+            <input class="form-control me-2" type="search" [(ngModel)]="SearchedName" placeholder="Search" name="name" aria-label="Search">
+            <button class="btn btn-outline-success" (click)=" sortByName()" type="submit">Search</button>
+          </form>
+     
+        </div>
+    <div class="row mx-auto">
+        <div class="col-xl-3 col-sm-6 mb-5 " *ngFor="let product of products?.results | paginate
+        : {
+            itemsPerPage: params.limit,
+            currentPage: params.page,
+            totalItems: total}; let index = index">
+            <div class="card shadow-lg mx-auto" style="width: 17rem; ">
+                <div class="card-body">
+                    <a (click)="showProduct(index)" class="d-flex justify-content-center shadow-lg mb-2 overflow-hidden"><img class="zoom  mb-3" style="height: 180px;max-width: 100%;" src="{{product.images[0]?.url || '../../../../assets/image/defaultProductimg.png '}}" alt="Card image cap"></a>
+                    <h5 class="card-title" data-toggle="tooltip" data-placement="top" [title]="product?.name">{{product?.name |trunc:[20, '...']  }}</h5>
+                    <div style="height: 50px;">
+                      <p class="card-text" data-toggle="tooltip" data-placement="top"  [innerHTML]="product?.description | trunc:[25,'...']" title="{{product?.description}}"></p>
+
+                    </div>
+                    <h4 style="width: fit-content; display: inline;" [ngClass]="{'text-decoration-line-through' : product.deal, 'fst-italic' :product.deal,'fs-6' : product.deal}">{{product.price | changeCurrency : currency}}&nbsp;</h4>
+                    <span class="fw-normal, fs-5" appDealDirective [deal]="product?.deal" [price]="product?.price" >
+                      
+                    </span>
+                   <div style="height: 66px;" *ngIf="!product.deal" class="d-flex align-items-centre">
+                    <p class="my-auto">Offers Coming Soon .... </p>
+                  </div>
+                    <hr>
+                    <div class="row">
+                      <button (click)="AddToCart(index)" class="btn btn-outline-dark mx-auto btn-sm" style="width: fit-content;">Add To Cart</button>
+                    </div>
+                </div>
+              </div>
+        </div>
+        <div class="row mt-3 ">
+            <div class="col-sm-3 col-md-6 mb-3">
+                <select class="form-select shadow-lg form-select-sm sel " [(ngModel)]="params.limit" (change)="callDataWithLimit()" aria-label=".form-select-sm example">
+                    <option selected>1</option>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    
+                </select>
+            </div>
+            <div class=" col-md-6  d-flex justify-content-end align-items-centre mb-3">
+                <nav aria-label="Page navigation example" class="me-3 p-0">
+                    <pagination-controls
+                      previousLabel=""
+                      nextLabel=""
+                      [responsive]="true"
+                      [maxSize]="5"
+                      (pageChange)="onTableDataChange($event)"
+                      class="pagination"
+                    >
+                    </pagination-controls>
+                  </nav>
+
+            </div>
+        </div>
+    </div>
+</div>

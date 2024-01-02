@@ -1,0 +1,88 @@
+<div class="container mt-2" >
+    <div class="row">
+        <button type="button" (click)="logout()" class="btn btn-danger logout">Log Out</button>
+    </div>
+</div>
+
+<!-- my-profile -->
+
+<div class="text-center card mx-auto mt-5 w-50" *ngIf="edit_var">
+    <img src="https://freesvg.org/img/abstract-user-flat-4.png" class="card-img-top img-fluid Profile" alt="Profile Photo">
+   <hr>
+    <div class="card-body ">
+        <div class="row">
+
+            <h3 class="card-title">{{res?.name | titlecase}}</h3>
+            
+            <div class="col-md-6 mb-3">
+
+                <h5 class=".font-weight-bold">email :</h5>
+                <p class="card-text">{{res?.email}}</p>
+            </div>
+            <div class="col-md-6 mb-3">
+
+                <h5 class=".font-weight-bold">Role :</h5>
+                <p class="card-text">{{res?.role}}</p>
+            </div>
+            <div class="col-md-6 mb-3">
+
+                <h5 class=".font-weight-bold">varified email :</h5>
+                <p *ngIf="!res?.isEmailVerified" class="card-text"><a (click)="verifyEmail()" class="text-primery">verify Email?</a></p>
+                <p *ngIf="res?.isEmailVerified" class="card-text"><span class="badge text-bg-success">Verified</span></p>
+            </div>
+            <div class="col-md-6 mb-3">
+                <h5 class=".font-weight-bold">Company Name :</h5>
+                <p class="card-text">{{res?._org.name}}</p>
+
+            </div>
+            <div class="text-center">
+      
+                <button type="button" class="btn btn-secondary" (click)="editProfile()">Edit</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<div class="text-center card mx-auto mt-5 w-50" [hidden]="edit_var" >
+    <img src="https://freesvg.org/img/abstract-user-flat-4.png" class="card-img-top img-fluid Profile" alt="Profile Photo">
+   <hr>
+    <div class="card-body " >
+        <form #edit1="ngForm">
+
+            <div class="row">
+                <div class="col-12 mb-3">
+    
+                    <h5 class=".font-weight-bold">Name:</h5>
+                    <input type="text" class="form-control mb-3" id="exampleInputName" [value]="profile.name" name="Full_Name" ngModel #name="ngModel" placeholder="Enter Full Name" required>
+                    
+                </div>
+                
+                <div class="col-md-6 mb-3">
+    
+                    <h5 class=".font-weight-bold">email :</h5>
+                    <input type="email" class="form-control " id="exampleInputEmail1" [value]="profile.email" name="email" ngModel #email="ngModel" aria-describedby="emailHelp" placeholder="Enter email" email required>
+                </div>
+                <div class="col-md-6 mb-3">
+    
+                    <h5 class=".font-weight-bold">Role :</h5>
+                    <input type="text" class="form-control mb-3" [value]="[profile.Role]" id="exampleInputRole" name="Role"ngModel #Role="ngModel" placeholder="Enter Role" required>
+                    
+                </div>
+                <div class="col-md-6 mb-3">
+    
+                    <h5 class=".font-weight-bold">varified email :</h5>
+                    <p class="card-text">{{profile.isEmailVerified}}</p>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <h5 class=".font-weight-bold">Company Name :</h5>
+                    <input type="text" class="form-control mb-3" [value]="[profile.CompanyName]" id="exampleInputCompanyName" name="Company_Name" ngModel #companyName="ngModel" placeholder="Enter Company Name" required>
+    
+                </div>
+                <div class="text-center">
+          
+                    <button type="button" class="btn btn-secondary" (click)="updateProfile(edit1)">Update</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

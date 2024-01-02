@@ -1,0 +1,6 @@
+select{
+    max-width: fit-content;
+}
+.zoom:hover{
+    scale: 1.1
+}

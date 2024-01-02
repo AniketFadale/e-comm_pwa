@@ -1,0 +1,16 @@
+.size{
+    width: fit-content;
+   
+    box-shadow: 5px 5px 8px 1px grey
+    /* box-shadow: 0 0 13px black ; */
+
+}
+
+input.ng-invalid.ng-touched{
+    border: red;
+    box-shadow: 0 0 13px inset rgba(255, 0, 0, 0.431);
+}
+a{
+    cursor: pointer;
+}
+

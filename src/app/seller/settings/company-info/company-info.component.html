@@ -1,0 +1,90 @@
+<div class="container  mt-3" *ngIf="edt">
+  <div class="card shadow-lg ms-auto me-auto">
+    <div class="row mx-auto">
+      <div class="col-12 p-0">
+        <div class="row d-flex w-100 text-center align-items-center">
+          <div class="col-md-4 my-3">
+
+            <img
+              src="https://cdn.onlinewebfonts.com/svg/img_358304.png"
+              class="card-img-top logo "
+              alt="..."
+            />
+          </div>
+          <div class="col-md-8">
+
+            <p class="card-title me-auto mx-auto comName my-auto" >{{res._org?.name}}</p>
+          </div>
+        </div>
+        <hr>
+      </div>
+
+      <div class="col-12 text-center">
+        <div class="card-body">
+          <div class="d-flex w-100 justify-content-center mb-3">
+            <h5 class="card-title">Email :</h5>
+            <p class="card-text">{{res._org?.email}}</p>
+          </div>
+        <a (click)="editCompany()" class="setting me-2"
+            >
+            <img src="../../../assets/logo/setting.jpeg" alt="">
+        </a>
+        <a (click)="CreateUser()" class="setting ms-2"
+            >
+            <img src="../../../assets/logo/create user.png" alt="">
+        </a>
+          
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container mt-3" *ngIf="!edt">
+  <div class="card shadow-lg ms-auto me-auto">
+    <div class="row mx-auto">
+      <div class="col-md-5 text-center my-auto ">
+        <img
+          src="https://cdn.onlinewebfonts.com/svg/img_358304.png"
+          class="card-img-top logo"
+          alt="logo"
+        />
+      </div>
+      <div class="col-md-6 d-flex mt-3">
+        <div class="mx-auto">
+          <p class="card-title me-auto  mt-auto mb-3 fw-bold">
+            Company Name :
+          </p>
+
+          <input
+            type="text"
+            name="name"
+            class="form-control w-100 me-auto"
+            required
+            [(ngModel)]="user.name"
+          />
+          <p class="card-title me-auto mt-2 fw-bold mb-3">Company Email :</p>
+
+          <input
+            type="email"
+            name="name"
+            class="form-control w-100 me-auto"
+            required
+            email
+            [(ngModel)]="user.email"
+          />
+        </div>
+      </div>
+
+      <div class="col-12 text-center">
+        <div class="card-body">
+          <a (click)="updateCompany()" class="btn btn-secondary">Update</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <router-outlet></router-outlet> -->
+<!-- <app-users></app-users> -->

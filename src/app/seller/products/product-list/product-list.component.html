@@ -1,0 +1,108 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+          <select class="form-select shadow-lg form-select-sm sort" [(ngModel)]="params.sortBy" [value]="params.sortBy" (change)="callData()" aria-label=".form-select-sm example">
+            <option selected value="default">Default</option>
+            <option value="price">Price</option>
+            <option value="name">Name</option>
+        
+          </select>
+     
+        </div>
+        <div class="col">
+          <form class="d-flex mb-2">
+            <input class="form-control me-2" type="search" [(ngModel)]="SearchedName" placeholder="Search" name="name" aria-label="Search">
+            <button class="btn btn-outline-success" (click)=" sortByName()" type="submit">Search</button>
+          </form>
+     
+        </div>
+    <div class="row ">
+        <div class="col-xl-3 col-sm-6 mb-5 " *ngFor="let product of products?.results | paginate
+        : {
+            itemsPerPage: params.limit,
+            currentPage: params.page,
+            totalItems: total}; let index = index">
+            <div class="card shadow-lg mx-auto" style="width: 17rem; ">
+                <div class="card-body">
+                    <a (click)="showProduct(index)"><img class="card-img-top shadow-lg mb-3" style="height: 180px;" src="{{product.images[0]?.url}}" alt="Card image cap"></a>
+                    <h5 class="card-title">{{product.name |trunc:[20, '...']  }}</h5>
+                    <p class="card-text" [innerHTML]="(product?.description) | trunc:[25, '...']"></p>
+                    <!-- <div [innerHTML]="product?.description  | trunc:[30, '...']"></div> -->
+
+                    <h4>{{ product.price  | changeCurrency :currency }}</h4>
+                    <hr>
+                    <div class="row d-flex justify-content-around ">
+                       
+                        <a class="btn btn-warning" data-bs-toggle="modal" (click)="saveIndex(index)" data-bs-target="#exampleModal"  style="max-width: fit-content;">Update</a>
+                        <a class="btn btn-danger " (click)="deleteProduct(index)" style="max-width: fit-content;" >Delete</a>
+                  </div>
+                </div>
+              </div>
+        </div>
+        <div class="row mt-3 ">
+            <div class="col-4 col-sm-3 col-md-6">
+                <select class="form-select shadow-lg form-select-sm select " [(ngModel)]="params.limit" (change)="callDataWithLimit()"   aria-label=".form-select-sm example">
+                    <option selected>1</option>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    
+                </select>
+            </div>
+            <div class="col col-md-6 d-flex justify-content-end align-items-centre select " >
+                <nav aria-label="Page navigation example" class="me-3 ">
+                    <pagination-controls
+                      previousLabel="Prev"
+                      nextLabel="Next"
+                      [responsive]="true"
+                      (pageChange)="onTableDataChange($event)"
+                      class="pagination"
+                    >
+                    </pagination-controls>
+                  </nav>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Launch demo modal
+  </button> -->
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title mx-auto fs-3" id="exampleModalLabel">Update Product</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4 pt-0" >
+            
+            <form class="mx-auto" #Product="ngForm">
+                <div class="form-group">
+                  <label for="exampleInputProductname" class="mb-2 mt-2 ">Name :</label>
+                  <input type="text" class="form-control" id="exampleInputProductname" [(ngModel)]="upadateParams.name" aria-describedby="nameHelp" placeholder="Enter name" name="name" required ngModel #name="ngModel">
+                 
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1" class="mb-2 mt-2">Description :</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" placeholder="Description" [(ngModel)]="upadateParams.description" name="description" required ngModel #description="ngModel"></textarea>
+                </div>
+                
+                <div class="form-group">
+                  <label for="exampleInputProductprice" class="mb-2 mt-2">Price :</label>
+                  <input type="number" class="form-control" id="exampleInputProductprice" aria-describedby="priceHelp" [(ngModel)]="upadateParams.price" placeholder="Enter Price" required name="price" ngModel #price="ngModel">
+                 
+                </div>
+                
+                
+            </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" [disabled]="!Product.valid" (click)="upadteProduct()" data-bs-dismiss="modal" class="btn btn-primary">Upadte Product</button>
+        </div>
+      </div>
+    </div>
+  </div>

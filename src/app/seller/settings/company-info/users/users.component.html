@@ -1,0 +1,256 @@
+<!-- create user block -->
+<div class="container"><div
+  class="size mx-auto border p-5 border-dark rounded-3 mt-3 bg-light"
+  [hidden]="creat"
+>
+  <a (click)="flag(register)" class="cross"
+    ><img src="../../../assets/logo/x.png" alt="CreateUser" />
+  </a>
+  <form #register="ngForm" >
+    <h1 class="text-center mb-4">Create User</h1>
+    <div class="form-group">
+      <label for="exampleInputName"
+        >Full Name <span class="text-danger">*</span></label
+      >
+      <input
+        type="text"
+        class="form-control mb-3"
+        id="exampleInputName"
+        name="name"
+        autofocus
+        ngModel
+        #name="ngModel"
+        placeholder="Enter Full Name"
+        required
+      />
+    </div>
+    <div class="form-group">
+      <label for="exampleInputCompanyName"
+        >Role<span class="text-danger">*</span></label
+      >
+      <select
+        class="form-select form-control mb-3"
+        aria-label="Default select example"
+        name="role"
+        ngModel
+        #role="ngModel"
+        required
+      >
+        <option value="user" selected>user</option>
+        <option value="admin">admin</option>
+      </select>
+    </div>
+    <div class="form-group mb-3">
+      <label for="exampleInputEmail1"
+        >Email address <span class="text-danger">*</span></label
+      >
+      <input
+        type="email"
+        class="form-control"
+        id="exampleInputEmail1"
+        name="email"
+        ngModel
+        #email="ngModel"
+        aria-describedby="emailHelp"
+        placeholder="Enter email"
+        email
+        required
+      />
+      <small id="emailHelp" class="form-text text-muted"
+        >We'll never share your email with anyone else.</small
+      >
+    </div>
+    <div class="form-group">
+      <label for="exampleInputPassword1"
+        >Password <span class="text-danger">*</span></label
+      >
+      <input
+        type="password"
+        class="form-control mb-3"
+        name="password"
+        id="exampleInputPassword1"
+        ngModel
+        #password="ngModel"
+        placeholder="Password"
+        required
+      />
+    </div>
+
+    <div class="text-center">
+      <button
+        type="submit"
+        [disabled]="!register.valid"
+        (click)="CreateUser(register)"
+        class="mb-3 mx-auto btn btn-primary"
+      >
+        Add User
+      </button>
+    </div>
+  </form>
+</div></div>
+
+
+<!-- users table block -->
+
+
+<div class="container mt-3" [hidden]="!creat || !edit">
+  <div class="mt-5 mb-4 text-center w-100">
+    <h3 class="fontst">User Details</h3>
+  </div>
+ <strong ><p class="mb-0">Sort:</p></strong> 
+ <div class="row">
+   <div class="col">
+     <select class="form-select shadow-lg form-select-sm sort" [(ngModel)]="parameters.sortBy" [value]="parameters.sortBy" (change)="sortBy()" aria-label=".form-select-sm example">
+       <option selected value="default">Default</option>
+       <option value="role">Role</option>
+       <option value="name">Name</option>
+       <option value="email">Email</option>
+     </select>
+
+   </div>
+   <div class="col">
+     <form class="d-flex mb-2">
+       <input class="form-control me-2" type="search" [(ngModel)]="SearchedName" placeholder="Search" name="name" aria-label="Search">
+       <button class="btn btn-outline-success" (click)=" sortByName()" type="submit">Search</button>
+     </form>
+
+   </div>
+ </div>
+ <div style="max-width: 100%;overflow: scroll;">
+
+   <table class="table shadow-lg"  >
+     <thead class="text-center">
+       <tr>
+         <th scope="col">No.</th>
+         <th scope="col">Name</th>
+         <th scope="col">Email</th>
+         <th scope="col">Role</th>
+         <th scope="col">Edit</th>
+         <th scope="col">Delete</th>
+       </tr>
+     </thead>
+     <tbody class="text-center">
+       <tr *ngFor="let i of res?.results | paginate
+       : {
+           itemsPerPage: parameters.limit,
+           currentPage: parameters.page,
+           totalItems: res?.totalResults}; let index = index">
+         <th scope="row">{{ index + 1 }}</th>
+         <td>{{ i?.name }}</td>
+         <td>{{ i?.email }}</td>
+ 
+         <td>
+           <select
+             name="role"
+             [(ngModel)]="i.role"
+             id="Role"
+             (change)="editRole(index)"
+             class="form-select form-select-sm"
+             aria-label=".form-select-sm example"
+             >
+             <option value="user">user</option>
+             <option value="admin">admin</option>
+           </select>
+         </td>
+         
+         <td>
+           <button type="button" (click)="editUser(index)" class="btn btn-warning">
+             Edit
+           </button>
+         </td>
+         <td>
+           <button
+           type="button"
+             (click)="deleteUser(index)"
+             class="btn btn-danger"
+             >
+             Delete
+           </button>
+         </td>
+       </tr>
+     </tbody>
+   </table>
+ </div>
+  <div class="row">
+    <select class="form-select shadow-lg form-select-sm sel" [(ngModel)]="parameters.limit" (change)="NumOfUserTOShow()" aria-label=".form-select-sm example">
+      <option selected>1</option>
+      <option value="5">5</option>
+      <option value="10">10</option>
+      
+    </select>
+    <nav aria-label="Page navigation example" >
+      <pagination-controls
+        previousLabel="Prev"
+        nextLabel="Next"
+        (pageChange)="onTableDataChange($event)"
+        class="pagination"
+      >
+      </pagination-controls>
+    </nav>
+  </div>
+  
+</div>
+
+<!-- edit user block -->
+
+<div class="container" [hidden]="edit">
+
+  
+  <div class="size mx-auto border shadow-lg p-5 border-dark rounded-3">
+    <a (click)="flagEditUser()" class="cross"
+    ><img src="../../../assets/logo/x.png" alt="CreateUser" />
+  </a>
+    <form>
+      <h1 class="text-center">Edit User</h1>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Name</label>
+        <input
+          type="text"
+          [(ngModel)]="EditUser.name"
+          required
+          class="form-control"
+          id="exampleInputname1"
+          
+          name="name"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input
+          type="email"
+          [(ngModel)]="EditUser.email"
+          class="form-control"
+          name="email"
+          id="exampleInputEmail1"
+          required
+          email
+          
+          
+        />
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Password</label>
+        <input
+          type="password"
+          [(ngModel)]="EditUser.password"
+          required
+          class="form-control"
+          id="exampleInputPassword1"
+          
+          name="password"
+        />
+      </div>
+
+      <div class="text-center">
+        <button
+          type="submit"
+          (click)="editInfo()"
+          
+          class="mb-3 btn btn-primary"
+        >
+          Update
+        </button>
+      </div>
+    </form>
+  </div>
+</div> 

@@ -1,0 +1,111 @@
+
+<div class="container-fluid">
+  <div class="row mb-3">
+    <h2 class="text-decoration-underline text-center">Order Details</h2>
+  </div>
+</div>
+<div class="card m-2"  >
+  <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
+  <div class="card-body mt-3">
+    <div class="row">
+      <div class="col-md-8 overflow-auto my-2">
+        <table class="table shadow-lg text-center">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <!-- <th scope="col">Img</th> -->
+              <th scope="col">Name</th>
+              <th scope="col">Price</th>
+              <th scope="col">After Discount</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">SubTotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of res?.items;let index= index" >
+              <th scope="row">{{index+1}}</th>
+              <!-- <td >{{item?.name}}</td> -->
+              <td>{{item?.name}}</td>
+              <td>{{item?.price}}</td>
+              <td>{{(item?.subTotal / item?.qty)}}</td>
+              <td>{{item?.qty}}</td>
+              <td>{{item?.subTotal }}</td>
+            </tr>
+           
+          </tbody>
+        </table>
+        <div class="text-center" *ngIf="(res?.status != 'Cancelled' && flag )" >
+
+          <button (click)="confirm()" *ngIf="(res?.status != 'Confirmed')" class="btn btn-primary btn-sm me-3 mt-2">Confirm Order</button>
+          <button (click)="cancelOrder()"  class="btn btn-danger btn-sm ms-auto mt-2">Cancel Order</button>
+        </div>
+
+      </div>
+      <div class="col-md-4">
+        
+            
+          <div class="card-body" >
+              <p>
+                  <a class="btn w-100 border" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                      <h5 class="card-title">Order Info</h5>
+                  </a>
+                  
+              </p>
+              <div class="collapse mb-2" id="collapseExample">
+                  <div class="card card-body">
+                      <div class="row ">
+                          <div class="col-6 my-2 fw-bold">Price (All items)</div>
+                          <div class="col-6 my-2">: {{res?.total | changeCurrency :currency}}</div>
+                          <div class="col-6 my-2 fw-bold">payment Status </div>
+                          <div class="col-6 my-2">: {{ res?.paymentStatus}}</div>
+                          <div class="col-6 my-2 fw-bold "> Status </div>     
+                          <div class="col-6 my-2 " [ngClass]="{'text-info':res?.status == 'Pending','text-danger':res?.status == 'Cancelled','text-success':res?.status == 'Confirmed'}"><span class="text-dark">: </span> {{ res?.status}}</div>
+                          <div class="col-6 my-2 fw-bold">Delivery Charges </div>
+                          <div class="col-6 my-2">: {{res?.deliveryFee |changeCurrency :currency}}</div>
+                          <div class="col-6 my-2 fw-bold">Order Date </div>
+                          <div class="col-6 my-2">: {{res?.createdAt| date   }}</div>
+                      </div>                        
+                  </div>
+              </div>
+              <p>
+                  <a class="btn w-100 border" data-bs-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample">
+                      <h5 class="card-title">Delivery Address</h5>
+                  </a>
+                  
+              </p>
+              <div class="collapse" id="collapseExample1">
+                  <div class="card card-body">
+                      <div class="row">
+                          <div class="col-6 my-2 fw-bold">Street</div>
+                          <div class="col-6 my-2">: {{res?.address.street}}</div>
+                          <div class="col-6 my-2 fw-bold">AddressLine2</div>
+                          <div class="col-6 my-2">: {{ res?.address.addressLine2}}</div>
+                          <div class="col-6 my-2 fw-bold"> City</div>
+                          <div class="col-6 my-2">: {{ res?.address.city}}</div>
+                          <div class="col-6 my-2 fw-bold">State</div>
+                          <div class="col-6 my-2">: {{res?.address.state}}</div>
+                          <div class="col-6 my-2 fw-bold">Pincode</div>
+                          <div class="col-6 my-2">: {{res?.address.pin}}</div>
+                      </div>                        
+                  </div>
+              </div>
+              <!-- <div class="row text-center" *ngIf="ProductData?.status != 'Delivered'">
+                  <div class="col-md-4">
+                      <button (click)="deliver()" class="btn btn-success">Deliver</button>
+                  </div>
+                  <div class="col-md-4">
+                      <button (click)="dispatch()" class="btn btn-warning">Dispatch</button>
+                  </div>
+                  <div class="col-md-4">
+                      <button (click)="cancel()" class="btn btn-danger">Cancel</button>
+                  </div>
+              </div> -->
+            
+            
+            <!-- <a (click)="PlaceOrder()" class="btn btn-primary">Place Order</a> -->
+          </div>
+  
+      </div>
+    </div>
+  </div>
+</div>

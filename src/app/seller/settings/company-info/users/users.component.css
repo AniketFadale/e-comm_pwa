@@ -1,0 +1,50 @@
+.size{
+    width: fit-content;
+    /* box-shadow: 0 0 13px black ; */
+    box-shadow: 5px 5px 8px 1px grey
+}
+
+@media screen and (max-width:900px){
+    h1{
+        font-size: 2rem;
+       
+    }
+    
+}
+@media screen and (max-width:500px){
+    .card{
+        width: 80%;
+    }
+    
+}
+input.ng-invalid.ng-touched,select.ng-invalid.ng-touched{
+    border: red;
+    box-shadow: 0 0 13px inset rgba(255, 0, 0, 0.807);
+}
+img{
+    width: 20px;
+}
+.cross{
+    position:relative;
+    
+    float: right;
+    max-width: 25px;
+    box-sizing: border-box;
+}
+.pagination{
+    justify-content: end;
+}
+.sel{
+    position: absolute;
+    max-width: fit-content;
+}
+.sort{
+    max-width: fit-content;
+}
+.fontst{
+    font-family: 'Bree Serif', serif;
+    text-decoration-line: underline;
+}
+a:hover{
+    cursor: pointer;
+}

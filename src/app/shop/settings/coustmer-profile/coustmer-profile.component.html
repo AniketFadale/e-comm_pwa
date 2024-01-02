@@ -1,0 +1,197 @@
+<div class="container mt-2">
+  <div class="row">
+    <button type="button" (click)="logout()" class="btn btn-danger logout">
+      Log Out
+    </button>
+  </div>
+</div>
+
+<!-- my-profile -->
+
+<div class="text-center card mx-auto mt-5 w-50" [hidden]="!edit_var">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-3 mb-2">
+        <div class="mx-auto" style="max-width: fit-content">
+          <img
+            src="{{ res?.picture }}"
+            class="card-img-top mt-3 img-fluid Profile shadow-lg "
+            alt="Profile Photo"
+          />
+          <div
+            class="ms-auto position-relative"
+            *ngIf="!(res?.picture == 'https://i.imgur.com/CR1iy7U.png')"
+            style="max-width: fit-content; top: -18px; left: 6px"
+          >
+            <a (click)="deleteProfilePic()"
+              ><img src="../../../../assets/logo/trash.svg" alt="delete"
+            /></a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <h3 class="card-title mb-3">{{ res?.name | titlecase }}</h3>
+
+        <h5 class=".font-weight-bold">email</h5>
+        <p class="card-text">{{ res?.email }}</p>
+      </div>
+
+      <div class="text-center">
+        <button type="button" class="btn btn-secondary" (click)="editProfile()">
+          Edit
+        </button>
+        <button
+          type="button"
+          style="min-width: fit-content"
+          class="btn btn-danger ms-2"
+          (click)="deleteAccount()"
+        >
+          Delete account
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- edit profile -->
+
+<div class="text-center card mx-auto mt-5 w-50" [hidden]="edit_var">
+  <div class="text-start">
+    <a (click)="goBack()">
+      <img
+        src="../../../../assets/logo/arrow-left-circle-fill.svg"
+        class="ms-2 mt-2"
+        alt="go_back"
+      />
+    </a>
+  </div>
+
+  <span class="mx-auto h-100 text-end" style="max-width: fit-content">
+    <div class="position-relative" style="top: 15px; left: 6px">
+      <a data-bs-toggle="modal" data-bs-target="#ImageUpdate">
+        <img
+          src="../../../../assets/logo/camera.svg"
+          class="rounded border p-1 border-light bg-dark"
+          alt=""
+      /></a>
+    </div>
+    <!-- <b >hh</b><br> -->
+    <img
+      src="{{ res?.picture }}"
+      class="card-img-top  img-fluid Profile"
+      alt="Profile Photo"
+    />
+  </span>
+  <hr />
+  <div class="card-body">
+    <form #edit1="ngForm">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <h5 class=".font-weight-bold">Name:</h5>
+          <input
+            type="text"
+            class="form-control mb-3"
+            id="exampleInputName"
+            [(ngModel)]="profile.name"
+            name="Full_Name"
+            ngModel
+            #name="ngModel"
+            placeholder="Enter Full Name"
+            required
+          />
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <h5 class=".font-weight-bold">email :</h5>
+          <input
+            type="email"
+            class="form-control"
+            id="exampleInputEmail1"
+            [(ngModel)]="profile.email"
+            name="email"
+            ngModel
+            #email="ngModel"
+            aria-describedby="emailHelp"
+            placeholder="Enter email"
+            email
+            required
+          />
+        </div>
+
+        <div class="text-center">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="updateProfile()"
+          >
+            Update
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!-- Button trigger modal -->
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="ImageUpdate"
+  tabindex="-1"
+  aria-labelledby="ImageUpdateLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ImageUpdateLabel">Edit IMG</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div class="input-group">
+          <!-- <input
+            type="file"
+            class="form-control"
+            id="inputGroupFile04"
+            (change)="addImg($event)"
+            aria-describedby="inputGroupFileAddon04"
+            aria-label="Upload"
+          /> -->
+          <input type="file" #inputImg (change)="fileChangeEvent($event)" />
+
+          <image-cropper 
+            
+            [imageChangedEvent]="imageChangedEvent"
+            [maintainAspectRatio]="true"
+            [aspectRatio]="4 / 4"
+            format="png"
+            (imageCropped)="imageCropped($event)"
+            (imageLoaded)="imageLoaded($event)"
+            (cropperReady)="cropperReady()"
+            (loadImageFailed)="loadImageFailed()"
+          ></image-cropper>
+
+          <img style="width: 100px;" [src]="croppedImage" />
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="updateProfilePic()"
+          data-bs-dismiss="modal"
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
