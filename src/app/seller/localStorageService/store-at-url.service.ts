@@ -35,7 +35,7 @@ export class StoreAtURLService {
   getUser():any{
     
     let tok=JSON.parse(localStorage.getItem('token')||'[]')
-
+    this.token=tok
     this.httpOption = {
       headers : new HttpHeaders({
         'Content-Type': 'application/json',
@@ -170,7 +170,8 @@ export class StoreAtURLService {
 
   getAllOrders(params:any){
     console.log(this.token);
-    
+    this.token=JSON.parse(localStorage.getItem('token')|| '[]');
+
     return this.http.get('https://shop-api.ngminds.com/orders/',{headers : new HttpHeaders({
       'Authorization' : 'bearer ' + this.token,
     }),params:params})
